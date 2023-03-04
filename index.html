@@ -10,13 +10,30 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="public/Assets/css/style.css">
     <link rel="stylesheet" href="public/Assets/css/icons.min.css">
+    <script src="public/Assets/js/socket.io.min.js"></script>
+    <script src="public/Assets/js/jquery.min.js"></script>
+    <script src="public/Assets/js/app.js"></script>
+    <script>
+        $(function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            var meeting_id = urlParams.get('meetingID');
+            var user_id = window.prompt("Enter your userid ");
+            if (!user_id || !meeting_id) {
+                alert('User id or meeting id missing');
+                window.location.href = '/action.html';
+                return;
+            }
+            $('meetingContainer').show();
+            MyApp._init(user_id, meeting_id);
+        })
+    </script>
 </head>
 
 <body>
     <main class="d-flex flex-column home-wrap">
         <div class="g-top text-light">
             <div class="top-remote-video-show-wrap d-flex">
-                <div id="meetingcontainer" class="w-75 d-none">
+                <div id="meetingContainer" class="w-75 d-none">
                     <div class="call-wrap" style="background-color: black;">
                         <div class="video-wrap" id="divUser" style="display:flex; flex-wrap:wrap">
                             <div id="me" class="userbox display-center flex-column">
